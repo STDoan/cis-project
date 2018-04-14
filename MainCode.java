@@ -11,13 +11,15 @@ import java.io.*;
 
 public class MainCode
 {
+        //test customers to try the code on    
         static Customer c1 = new Customer("Jane",5000);
         static Customer c2 = new Customer("Jone",8000);
         static Customer c3 = new Customer("mmmm", 1000000);
+        //test
+        static Casino cas1 = new Casino();
+        static Casino cas2 = new Casino("JimmyJOnes", 500000);
+        static Casino cas3 = new Casino("Brusters",123456);
         
-        static Casino asdf = new Casino();
-        static Casino qwer = new Casino("JimmyJOnes", 500000);
-        static Casino zxcv = new Casino("Brusters",123456);
         static Scanner input = new Scanner(System.in);
         static Random rand = new Random();
     public static void main(String[] args)
@@ -36,7 +38,8 @@ public class MainCode
         
         
         //asdf playing against c1
-        asdf.slots();
+        cas1.sevenEleven(c1);
+        cas1.slots(c1);
         
     }
     
@@ -179,15 +182,15 @@ public class MainCode
             System.out.println();
         }
         
-        public void sevenEleven(){
+        public void sevenEleven(Customer cc){
             Random rand = new Random();
             //boolean to use to re-roll and loop until winner is decided.
             boolean noWinner = true;
             //boolean expression to check if the customer and casino have enouh funds.
             boolean goodEnough = true;
             
-            c1.details();
-            asdf.details();
+            cc.details();
+            this.details();
             System.out.println("Let's start a game of Seven/Eleven.");
             Scanner keyboard = new Scanner(System.in);
             //Placing bet Amout
@@ -210,13 +213,13 @@ public class MainCode
                 c1.changeBalance(-betAmount);
                 
                 //check to make sure the casino has enough funds
-                goodEnough = asdf.checkBalance(betAmount);
+                goodEnough = this.checkBalance(betAmount);
                 while(goodEnough!=true)
                 {
-                    System.out.println("This is the current funds for the Casino: " + asdf.getBalance());
-                     goodEnough = asdf.checkBalance(keyboard.nextDouble());
+                    System.out.println("This is the current funds for the Casino: " + this.getBalance());
+                     goodEnough = this.checkBalance(keyboard.nextDouble());
                 }
-                asdf.changeBalance(-betAmount);
+                this.changeBalance(-betAmount);
             //Roll the dice
         
             while(noWinner){
@@ -268,13 +271,13 @@ public class MainCode
 
         } 
         
-        public void slots()
+        public void slots(Customer cc)
         {
             int spins = 0;
             double bet = 0;
             
-            System.out.println("Your current balance is " + c1.getBalance());
-            System.out.println("the casino's balance is "+asdf.getBalance());
+            System.out.println("Your current balance is " + cc.getBalance());
+            System.out.println("the casino's balance is "+this.getBalance());
             System.out.println("Now it's time to play a game of slots");
             System.out.println("How many time would you like to spin?");
             System.out.println("It costs 5 per spin.");
@@ -289,48 +292,49 @@ public class MainCode
             
             //line of code that will check if the player has enough money.
             //line of code for the casino to match the bet the player placed.
-            goodEnough = c1.checkBalance(bet);
+            goodEnough = cc.checkBalance(bet);
             while(goodEnough != true)
             {
                 System.out.println("Please place a bet within your funds");
-                System.out.println("Therefore, you can do " +c1.getBalance()/5+" spins");
-                System.out.println("You have funds of " + c1.getBalance());
-                goodEnough = c1.checkBalance(input.nextDouble());
+                System.out.println("Therefore, you can do " +cc.getBalance()/5+" spins");
+                System.out.println("You have funds of " + cc.getBalance());
+                goodEnough = cc.checkBalance(input.nextDouble());
             }
             //the bet amount is negative to annotate that the moeny will be taken out of the account.
-            c1.changeBalance(-bet);
-            asdf.changeBalance(bet);
+            cc.changeBalance(-bet);
+            this.changeBalance(bet);
             
             for(int i=0; i<spins; i++){
                 int chance = rand.nextInt(100)+1;
                 if(chance <=70){
                     System.out.println("You've one 1 from the casino");
-                    c1.changeBalance(1);
-                    asdf.changeBalance(-1);
+                    cc.changeBalance(1);
+                    this.changeBalance(-1);
                 }
                 
                 if(chance >70&&chance<=90){
                     System.out.println("You've one 5 from the casino");
-                    c1.changeBalance(5);
-                    asdf.changeBalance(-5);
+                    cc.changeBalance(5);
+                    this.changeBalance(-5);
                 }
                 
                 if(chance >90&&chance<=99){
                     System.out.println("You've one 10 from the casino");
-                    c1.changeBalance(10);
-                    asdf.changeBalance(-10);
+                    cc.changeBalance(10);
+                    this.changeBalance(-10);
                 }
                 
                 if(chance==100){
                     System.out.println("You've one 100 from the casino");
-                    c1.changeBalance(100);
-                    asdf.changeBalance(-100);
+                    cc.changeBalance(100);
+                    this.changeBalance(-100);
                 }
             }
             
-            System.out.println("Your new balance is " + c1.getBalance());
-            System.out.println("the casino's new balance is "+asdf.getBalance());
+            System.out.println("Your new balance is " + cc.getBalance());
+            System.out.println("the casino's new balance is "+this.getBalance());
         }//slots
+        
     }//casino
    
 }//public 
