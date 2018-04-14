@@ -1,9 +1,9 @@
 # cis-project
  This project is meant to have a Customer and casino Class objects. Casino offers 4 different games: Seven-Eleven, Blackjack, Slots, and High low
  
- To test the programs, it's ok the preset three customer and 3 casino object but each need a different name and balance.
+ To test the programs, it's ok to preset three customer and 3 casino objects in the main code but each need a different name and balance.
  
- There is a main interface the uder and interact with. It has to options to:
+ There is a main interface the user can interact with. It has to options to:
         
         1. Create a new customer (if no name input or balance input, default will be ("Default customer", double 1000))
         
